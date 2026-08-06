@@ -1,7 +1,7 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
 import { NavArrowDown } from "iconoir-react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 import { Container } from "./Container";
 import { CustomLink } from "./CustomLink";
@@ -81,12 +81,12 @@ export const ProductCategories = () => {
   const hiddenCategories = categories.slice(visibleCount);
 
   return (
-    <div className="w-full border-y border-neutral-200">
+    <div className="w-full border-y border-neutral-200  px-5">
       <Container className="relative">
         <nav
           ref={navigationRef}
           aria-label="Product categories"
-          className="flex w-full items-center gap-5 py-3"
+          className="flex w-full items-center justify-center gap-5 py-3"
         >
           {visibleCategories.map((category) => (
             <CustomLink
@@ -100,7 +100,7 @@ export const ProductCategories = () => {
           ))}
 
           {hiddenCategories.length > 0 && (
-            <div className="relative ml-auto shrink-0">
+            <div className="relative shrink-0">
               <button
                 type="button"
                 onClick={() => setIsOpen((current) => !current)}
@@ -144,7 +144,6 @@ export const ProductCategories = () => {
           )}
         </nav>
 
-        {/* Elementos invisíveis usados apenas para medir as larguras */}
         <div
           ref={measurementRef}
           aria-hidden="true"
