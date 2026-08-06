@@ -3,29 +3,12 @@
 import { Bell, Cart } from "iconoir-react";
 import Link from "next/link";
 import { Container } from "./Container";
-
-interface InternalLinkProps {
-  text: string;
-  path: string;
-  color: string;
-  underline: boolean;
-}
+import { CustomLink } from "./CustomLink";
 
 interface InternalButton {
   icon: React.ReactElement;
   onClick?: () => void;
 }
-
-const InternalLink = ({ text, path, color, underline }: InternalLinkProps) => {
-  return (
-    <Link
-      href={path}
-      className={`${color} font-medium ${underline && "underline"} hover:underline`}
-    >
-      {text}
-    </Link>
-  );
-};
 
 const InternalButton = ({ icon, onClick }: InternalButton) => {
   return (
@@ -68,29 +51,32 @@ export const AnnouncementBar = () => {
         <div className="left flex gap-5">
           <h5>
             Hi!{" "}
-            <InternalLink
+            <CustomLink
               path="#"
               text="Sign in"
               underline={true}
               color="text-blue-600"
+              fontSize="font-medium"
             />{" "}
             <span>or</span>{" "}
-            <InternalLink
+            <CustomLink
               path="#"
               text="register"
               underline={true}
               color="text-blue-600"
+              fontSize="font-medium"
             />
           </h5>
           <div className="flex gap-2">
             {links.left.map((item, index) => {
               return (
-                <InternalLink
+                <CustomLink
                   key={index}
                   path={item.path}
                   text={item.name}
                   underline={false}
                   color="text-black"
+                  fontSize="font-medium"
                 />
               );
             })}
@@ -99,12 +85,13 @@ export const AnnouncementBar = () => {
         <div className="right flex gap-5">
           {links.right.map((item, index) => {
             return (
-              <InternalLink
+              <CustomLink
                 key={index}
                 path={item.path}
                 text={item.name}
                 underline={false}
                 color="text-black"
+                fontSize="font-medium"
               />
             );
           })}
