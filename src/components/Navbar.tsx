@@ -4,7 +4,7 @@ import { Container } from "./Container";
 
 export const Navbar = () => {
   return (
-    <div className="border-[0.5px] border-gray-400  px-5">
+    <div className="border-[0.5px] border-gray-400 border-l-0 border-r-0  px-5">
       <Container>
         <div className="flex w-full items-center justify-between gap-5 py-7">
           <Image

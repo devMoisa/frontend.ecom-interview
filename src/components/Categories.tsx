@@ -147,10 +147,10 @@ export const ProductCategories = () => {
         <div
           ref={measurementRef}
           aria-hidden="true"
-          className="pointer-events-none absolute invisible flex items-center gap-5 whitespace-nowrap"
+          className="pointer-events-none absolute left-0 top-0 invisible flex w-full items-center gap-5 overflow-hidden whitespace-nowrap"
         >
           {categories.map((category) => (
-            <span key={category} className="text-sm font-medium">
+            <span key={category} className="shrink-0 text-sm font-medium">
               {category}
             </span>
           ))}
