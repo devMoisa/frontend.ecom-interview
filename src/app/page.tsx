@@ -2,6 +2,9 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { ProductCategories } from "@/components/Categories";
 import { HeroCarousel } from "@/components/HeroCarousel";
 import { Navbar } from "@/components/Navbar";
+import { PopularCategories } from "@/components/PopularCategories";
+import { ProductGrid } from "@/components/ProductGrid";
+import { ShoppingBenefits } from "@/components/ShoppingBenefits";
 
 export default function Home() {
   return (
@@ -10,6 +13,9 @@ export default function Home() {
       <Navbar />
       <ProductCategories />
       <HeroCarousel />
+      <ShoppingBenefits />
+      <PopularCategories />
+      <ProductGrid />
     </main>
   );
 }
