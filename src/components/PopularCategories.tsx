@@ -1,5 +1,8 @@
-import { Plus } from "iconoir-react";
+"use client";
+
+import { NavArrowLeft, NavArrowRight, Plus } from "iconoir-react";
 import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Container } from "./Container";
 
@@ -37,17 +40,90 @@ const categories = [
 ];
 
 export const PopularCategories = () => {
+  const carouselRef = useRef<HTMLUListElement>(null);
+  const [canScrollBack, setCanScrollBack] = useState(false);
+  const [canScrollForward, setCanScrollForward] = useState(true);
+
+  const updateControls = useCallback(() => {
+    const carousel = carouselRef.current;
+
+    if (!carousel) return;
+
+    const firstItem = carousel.querySelector("li");
+    const minScrollLeft = firstItem?.offsetLeft ?? 0;
+    const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+
+    setCanScrollBack(carousel.scrollLeft > minScrollLeft + 2);
+    setCanScrollForward(carousel.scrollLeft < maxScrollLeft - 2);
+  }, []);
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+
+    if (!carousel) return;
+
+    updateControls();
+
+    const resizeObserver = new ResizeObserver(updateControls);
+    resizeObserver.observe(carousel);
+
+    return () => resizeObserver.disconnect();
+  }, [updateControls]);
+
+  const moveCarousel = (direction: -1 | 1) => {
+    const carousel = carouselRef.current;
+    const firstItem = carousel?.querySelector("li");
+
+    if (!carousel || !firstItem) return;
+
+    carousel.scrollBy({
+      left: direction * (firstItem.offsetWidth + 16),
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section aria-labelledby="popular-categories-title" className="py-8">
       <Container className="md:px-6">
-        <h2
-          id="popular-categories-title"
-          className="font-heading text-2xl font-semibold tracking-tight text-neutral-950"
-        >
-          Popular categories
-        </h2>
+        <div className="flex items-center justify-between gap-4">
+          <h2
+            id="popular-categories-title"
+            className="font-heading text-2xl font-semibold tracking-tight text-neutral-950"
+          >
+            Popular categories
+          </h2>
 
-        <ul className="-mx-4 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:px-0 lg:grid-cols-6 [&::-webkit-scrollbar]:hidden">
+          <div className="flex shrink-0 items-center gap-2 md:hidden">
+            <button
+              type="button"
+              onClick={() => moveCarousel(-1)}
+              disabled={!canScrollBack}
+              aria-label="Previous categories"
+              aria-controls="popular-categories-carousel"
+              className="flex size-10 cursor-pointer items-center justify-center rounded-full border border-neutral-300 text-neutral-800 transition hover:bg-neutral-100 disabled:cursor-not-allowed disabled:opacity-35"
+            >
+              <NavArrowLeft aria-hidden="true" className="size-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => moveCarousel(1)}
+              disabled={!canScrollForward}
+              aria-label="Next categories"
+              aria-controls="popular-categories-carousel"
+              className="flex size-10 cursor-pointer items-center justify-center rounded-full border border-neutral-300 text-neutral-800 transition hover:bg-neutral-100 disabled:cursor-not-allowed disabled:opacity-35"
+            >
+              <NavArrowRight aria-hidden="true" className="size-5" />
+            </button>
+          </div>
+        </div>
+
+        <ul
+          ref={carouselRef}
+          id="popular-categories-carousel"
+          onScroll={updateControls}
+          aria-label="Popular category slides"
+          className="-mx-4 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:px-0 lg:grid-cols-6 [&::-webkit-scrollbar]:hidden"
+        >
           {categories.map((category) => (
             <li key={category.label} className="w-40 shrink-0 snap-start md:w-auto">
               <Link
