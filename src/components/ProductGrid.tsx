@@ -5,50 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+import { products } from "@/lib/products";
 import { Container } from "./Container";
-
-const products = [
-  {
-    id: "wireless-headphones",
-    name: "Premium Wireless Over-Ear Headphones",
-    image: "/products/wireless-headphones.png",
-    price: "$129.99",
-    previousPrice: "$169.99",
-    discount: "24% off",
-    rating: "4.8",
-    reviews: "1,284",
-  },
-  {
-    id: "everyday-sneaker",
-    name: "Everyday Suede Low-Top Sneakers",
-    image: "/products/everyday-sneaker.png",
-    price: "$84.00",
-    previousPrice: "$110.00",
-    discount: "24% off",
-    rating: "4.7",
-    reviews: "892",
-  },
-  {
-    id: "smart-watch",
-    name: "Graphite Smart Watch with Sport Band",
-    image: "/products/smart-watch.png",
-    price: "$149.99",
-    previousPrice: "$199.99",
-    discount: "25% off",
-    rating: "4.9",
-    reviews: "2,106",
-  },
-  {
-    id: "coffee-maker",
-    name: "Compact Drip Coffee Maker with Glass Carafe",
-    image: "/products/coffee-maker.png",
-    price: "$69.90",
-    previousPrice: "$89.90",
-    discount: "22% off",
-    rating: "4.6",
-    reviews: "645",
-  },
-];
 
 export const ProductGrid = () => {
   const [favorites, setFavorites] = useState<Set<string>>(() => new Set());
@@ -100,7 +58,7 @@ export const ProductGrid = () => {
               <article key={product.id} className="group min-w-0">
                 <div className="relative aspect-square overflow-hidden rounded-2xl bg-[#f4f2ef]">
                   <Link
-                    href="#"
+                    href={`/products/${product.id}`}
                     aria-label={`View ${product.name}`}
                     className="absolute inset-0"
                   >
@@ -135,7 +93,7 @@ export const ProductGrid = () => {
 
                 <div className="pt-4">
                   <Link
-                    href="#"
+                    href={`/products/${product.id}`}
                     className="line-clamp-2 text-sm leading-5 font-medium text-neutral-900 hover:underline sm:text-base sm:leading-6"
                   >
                     {product.name}

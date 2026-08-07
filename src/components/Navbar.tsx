@@ -1,19 +1,22 @@
 import { Search } from "iconoir-react";
 import Image from "next/image";
 import { Container } from "./Container";
+import Link from "next/link";
 
 export const Navbar = () => {
   return (
     <div className="border-[0.5px] border-gray-400 border-l-0 border-r-0  px-5">
       <Container>
         <div className="flex w-full items-center justify-between gap-5 py-7">
-          <Image
-            width={1080}
-            height={231}
-            src="/logo.png"
-            alt="AmazGoogleNetPMorganBay Logo"
-            className="h-auto w-28 shrink-0 cursor-pointer object-contain transition hover:opacity-70 md:w-[250px]"
-          />
+          <Link href={"/"}>
+            <Image
+              width={1080}
+              height={231}
+              src="/logo.png"
+              alt="AmazGoogleNetPMorganBay Logo"
+              className="h-auto w-28 shrink-0 cursor-pointer object-contain transition hover:opacity-70 md:w-[250px]"
+            />
+          </Link>
           <div className="relative w-full">
             <Search
               aria-hidden="true"
