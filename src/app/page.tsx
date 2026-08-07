@@ -13,9 +13,6 @@ export default function Home() {
   return (
     <>
       <main className="flex-1">
-        <Container>
-          <Logo />
-        </Container>
         <AnnouncementBar />
         <Navbar />
         <ProductCategories />

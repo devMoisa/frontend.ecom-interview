@@ -2,6 +2,7 @@ import { Facebook, Instagram, Youtube } from "iconoir-react";
 import Link from "next/link";
 
 import { Container } from "./Container";
+import { Logo } from "./Logo";
 
 const linkGroups = [
   {
@@ -34,7 +35,7 @@ export const Footer = () => {
               href="#"
               className="font-heading text-2xl font-semibold tracking-tight"
             >
-              AmazGooNetFPMorganBay
+              <Logo variant="long" oneColor="#FFF" fontSize={20} />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-6 text-white/75">
               Everything you love, all in one place. Discover great products,
